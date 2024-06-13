@@ -9,6 +9,13 @@ const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 
 const btnScrollTo = document.querySelector('.btn--scroll-to'); //use dot(.) when selecting a class
 const section1 = document.querySelector('#section--1'); // use hash(#) when selecting an id
+const nav = document.querySelector('.nav')
+
+// Tabbed component
+const tabs = document.querySelectorAll('.operations__tab')
+const tabsConatianer = document.querySelector('.operations__tab-container')
+const tabsContent = document.querySelectorAll('.operations__content')
+
 
 ///////////////////////////////////////
 // Modal window
@@ -84,10 +91,6 @@ document.querySelector('.nav__links').addEventListener('click', function(e){
   document.querySelector(id).scrollIntoView({behavior: 'smooth'})
   })
 
-// Tabbed component
-const tabs = document.querySelectorAll('.operations__tab')
-const tabsConatianer = document.querySelector('.operations__tab-container')
-const tabsContent = document.querySelectorAll('.operations__content')
 
 // Event delegation
 tabsConatianer.addEventListener('click', function(e){
@@ -105,6 +108,24 @@ if(!clicked) return
  // Activate content area
   document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active')
 })
+
+// Menu fase animation
+const handleHover = function(e){
+  if(e.target.classList.contains('nav__link')){
+    const link = e.target
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link')
+    const logo = link.closest('.nav').querySelector('img')
+
+    siblings.forEach(el => {
+      if(el !== link) el.style.opacity = this
+    })
+    logo.style.opacity = this
+  }
+}
+
+//  passing an "argument" into handles
+nav.addEventListener('mouseover', handleHover.bind(0.5))
+nav.addEventListener('mouseout', handleHover.bind(1))
 
 
 ////////////////////////////////
@@ -251,3 +272,4 @@ console.log(h1.parentsElement.children);
 [...h1.parentElement.children].forEach(function(el){
   if(el !== h1) el.style.transform = 'scale(0.5)'
 })
+
